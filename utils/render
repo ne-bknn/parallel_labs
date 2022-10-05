@@ -1,0 +1,49 @@
+#!/usr/bin/python3
+
+import subprocess
+import jinja2
+import sys
+import datetime
+
+full_name = "Мищенко Тимофей"
+group = "Б20-505"
+
+
+def sh(cmd: str):
+    """Execute command and return its stdout"""
+
+    proc = subprocess.run(
+        cmd, shell=True, stdout=subprocess.PIPE, stderr=subprocess.DEVNULL
+    )
+
+    if proc.returncode != 0:
+        raise RuntimeError(f"Command {cmd} failed")
+
+    return proc.stdout.decode().strip()
+
+
+def header(lab_n: int):
+    year = datetime.datetime.now().year
+    return f"# НИЯУ МИФИ. Лабораторная работа №{lab_n}. {full_name}, {group}. {year}"
+
+
+def graphstyle():
+    return '%%{ init : {"flowchart" : { "curve" : "stepAfter" }}}%%'
+
+
+def main():
+    if len(sys.argv) != 2:
+        print("Usage: render.py <template>")
+        sys.exit(1)
+
+    template_name = sys.argv[1]
+
+    # Load template
+    template = jinja2.Template(open(template_name).read())
+
+    # Render template
+    print(template.render(sh=sh, header=header, graphstyle=graphstyle))
+
+
+if __name__ == "__main__":
+    main()
