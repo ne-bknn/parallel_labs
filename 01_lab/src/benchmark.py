@@ -147,6 +147,8 @@ def render_acceleration(actual_data: pd.DataFrame, max_threads: int):
     plot.set_xticks(range(0, max_threads))
     plot.set_yticks(range(0, 5))
 
+    plot.axvline(x=get_n_cores(), color="red", linestyle="--", label="cores")
+
     plot.set_xlabel("Threads, num", fontsize=16)
     plot.set_ylabel("Acceleration, times", fontsize=16)
 
@@ -169,6 +171,8 @@ def render_efficiency(actual_data: pd.DataFrame, max_threads: int):
     plot.margins(x=0, y=0)
     plot.set_xticks(range(0, max_threads))
     plot.set_yticks(range(0, 5))
+
+    plot.axvline(x=get_n_cores(), color="red", linestyle="--", label="cores")
 
     plot.set_xlabel("Threads, num", fontsize=16)
     plot.set_ylabel("Efficiency, times", fontsize=16)
