@@ -12,7 +12,7 @@ DEBUG = -g
 OPENMP = -fopenmp
 
 .PHONY: report
-report.md: target/version src/report.md.jinja2 src/main.c target/benchmark.png
+report.md: target/version target/main src/report.md.jinja2 benchmark
 	../utils/render src/$@.jinja2 > $@
 
 target:
@@ -21,7 +21,8 @@ target:
 .PHONY: main
 main: target/main
 
-target/benchmark.png: src/benchmark.py 
+.PHONY: benchmark
+benchmark: src/benchmark.py 
 	python3 $?
 
 target/main: src/main.c | target
