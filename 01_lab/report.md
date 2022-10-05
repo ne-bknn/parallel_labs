@@ -42,14 +42,15 @@ OpenMP 4.5
 
 ```mermaid
     %%{ init : {"flowchart" : { "curve" : "stepAfter" }}}%%
-    graph LR
-        A(Начало) --> B(i: 0 -> n)
+    %%| fig-width: 7
+    graph TD
+        A(start) --> B(i: 0 -> n)
         
         B --> C{"array[i] > max"}
-        B --> E(выход)
-        C -->|Да| D["max = array[i]"]
+        B --> E(exit)
+        C -->|yes| D["max = array[i]"]
         D --> B
-        C -->|Нет| B
+        C -->|no| B
 ```
 
 ### Принцип работы
