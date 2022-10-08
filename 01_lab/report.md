@@ -7,18 +7,19 @@
 CPU:
   Info: quad core model: Intel Core i5-8265U bits: 64 type: MT MCP cache:
     L2: 1024 KiB
-  Speed (MHz): avg: 1392 min/max: 400/3900 cores: 1: 1001 2: 938 3: 1800
-    4: 1000 5: 1000 6: 1800 7: 1800 8: 1800
+  Speed (MHz): avg: 898 min/max: 400/3900 cores: 1: 900 2: 900 3: 884
+    4: 900 5: 900 6: 900 7: 900 8: 900
 ```
 
 ### Характеристики памяти:
 ```
-Machine:
-  Type: Laptop System: LENOVO product: 20NX000ART v: ThinkPad T490s
-    serial: <superuser required>
-  Mobo: LENOVO model: 20NX000ART v: SDK0J40697 WIN
-    serial: <superuser required> UEFI: LENOVO v: N2JET94W (1.72 )
-    date: 03/03/2021
+Memory:
+  RAM: total: 15.32 GiB used: 11.92 GiB (77.8%)
+  Array-1: capacity: 32 GiB slots: 2 EC: None
+  Device-1: ChannelA-DIMM0 type: DDR4 size: 8 GiB speed: spec: 2667 MT/s
+    actual: 2400 MT/s
+  Device-2: ChannelB-DIMM0 type: DDR4 size: 8 GiB speed: spec: 2667 MT/s
+    actual: 2400 MT/s
 ```
 
 ### Версия gcc:
@@ -33,7 +34,7 @@ OpenMP 4.5
 
 ### Остальные Характеристики
 ```
-5.19.12-arch1-1 x86_64
+5.19.13-arch1-1 x86_64
 ```
 
 ## Оценка алгоритма
@@ -41,16 +42,15 @@ OpenMP 4.5
 ### Блок-схема
 
 ```mermaid
-    %%{ init : {"flowchart" : { "curve" : "stepAfter" }}}%%
-    %%| fig-width: 7
-    graph TD
-        A(start) --> B(i: 0 -> n)
+    graph LR
+        %%{ init : {"flowchart" : { "curve" : "stepAfter" }}}%%
+        A(Начало) --> B(i: 0 -> n)
         
         B --> C{"array[i] > max"}
-        B --> E(exit)
-        C -->|yes| D["max = array[i]"]
+        B --> E(выход)
+        C -->|Да| D["max = array[i]"]
         D --> B
-        C -->|no| B
+        C -->|Нет| B
 ```
 
 ### Принцип работы
@@ -71,7 +71,7 @@ $n$ - длина обрабатываемой последовательност
 
 ### Директивы OpenMP
 `#pragma omp parallel num_threads(threads) shared(array, count) reduction(max: max) default(none)`  
-Объявляется параллельная обасть, с количеством потоков `threads`. Переменные `array` и `count`
+Объявляется параллельная область, с количеством потоков `threads`. Переменные `array` и `count`
 объявляются общими для всех потокв и непараллельной части алгоритма. Все новые переменные без явного
 указания класса не разрешены.  
 Область - цикл for.
@@ -79,8 +79,8 @@ $n$ - длина обрабатываемой последовательност
 
 `#pragma omp for`
 Задается директива относящаяся к циклу for идущему сразу после нее, выполняется распараллеливагие цикла с дефолтным значением schedule.
-Область - цикл for.  
-Если бы ее не было то цикл выполнился бы `threads` раз, каждый раз находя один и тот же максимальный элемент.
+Область - цикл for.
+Если бы ее не было, то цикл выполнился бы `n_threads` раз, каждый раз находя один и тот же максимальный элемент.
 
 ### Экспериментальные данные
 

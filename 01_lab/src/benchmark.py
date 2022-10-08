@@ -175,7 +175,7 @@ def render_efficiency(actual_data: pd.DataFrame, max_threads: int):
     plot.axvline(x=get_n_cores(), color="red", linestyle="--", label="cores")
 
     plot.set_xlabel("Threads, num", fontsize=16)
-    plot.set_ylabel("Efficiency, times", fontsize=16)
+    plot.set_ylabel("Efficiency, thread^-1", fontsize=16)
 
     # save plot
     fig.savefig("target/efficiency.png")
