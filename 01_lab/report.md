@@ -7,14 +7,14 @@
 CPU:
   Info: quad core model: Intel Core i5-8265U bits: 64 type: MT MCP cache:
     L2: 1024 KiB
-  Speed (MHz): avg: 898 min/max: 400/3900 cores: 1: 900 2: 900 3: 884
-    4: 900 5: 900 6: 900 7: 900 8: 900
+  Speed (MHz): avg: 747 min/max: 400/3900 cores: 1: 731 2: 754 3: 792
+    4: 774 5: 734 6: 695 7: 751 8: 751
 ```
 
 ### Характеристики памяти:
 ```
 Memory:
-  RAM: total: 15.32 GiB used: 11.92 GiB (77.8%)
+  RAM: total: 15.32 GiB used: 12.13 GiB (79.2%)
   Array-1: capacity: 32 GiB slots: 2 EC: None
   Device-1: ChannelA-DIMM0 type: DDR4 size: 8 GiB speed: spec: 2667 MT/s
     actual: 2400 MT/s
@@ -43,7 +43,7 @@ OpenMP 4.5
 
 ```mermaid
     graph LR
-        %%{ init : {"flowchart" : { "curve" : "stepAfter" }}}%%
+        %%{ init : {"flowchart" : { "curve" : "stepAfter", "diagramPadding": 20 }}}%%
         A(Начало) --> B(i: 0 -> n)
         
         B --> C{"array[i] > max"}

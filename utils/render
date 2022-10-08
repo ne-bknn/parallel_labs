@@ -28,7 +28,7 @@ def header(lab_n: int):
 
 
 def graphstyle():
-    return '%%{ init : {"flowchart" : { "curve" : "stepAfter" }}}%%'
+    return '%%{ init : {"flowchart" : { "curve" : "stepAfter", "diagramPadding": 20 }}}%%'
 
 
 def main():
