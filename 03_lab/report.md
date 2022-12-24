@@ -41,7 +41,7 @@ OpenMP 4.5
 
 ### Оценка временной сложности
 
-- Лучший случай: $O(\displaystyle\frac{n^2}{p})$
+- Лучший случай: $O(\displaystyle\frac{n \log{n}}{p})$
 - Худший случай: $O(\displaystyle\frac{n^2}{p})$
 
 
