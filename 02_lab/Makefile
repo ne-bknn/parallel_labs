@@ -18,7 +18,7 @@ EFF = graphs/Efficiency.png
 .PHONY: all
 all: parallel.out serial.out report.md
 
-report.md: target/version src/report.md.jinja2 graphs
+report.md: target/version src/report.md.jinja2
 	echo "Creating report"
 	../utils/render src/$@.jinja2 > $@
 
